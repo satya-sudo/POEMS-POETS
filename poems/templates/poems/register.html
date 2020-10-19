@@ -1,0 +1,49 @@
+{% extends "poems/layout.html" %}
+
+{% block body %}
+    <div class="container">
+        <h2>Sign-Up</h2>
+
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-lg-4 col-sm-12 login-quote">
+                “some winters
+                will never melt
+
+                some summers
+                will never freeze
+
+                and some things will only
+               live in poems.” 
+            </div>
+
+            <form action="{% url 'register' %}" method="post" class="col-lg-8 col-sm-12">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="email" name="email" placeholder="Email Address">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="firstname" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="lastname" placeholder="Last Name">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="password" name="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+                </div>
+                <input class="cus-button" type="submit" value="Sign-Up">
+                <p style="padding: 5px;">Already a part of our family?<a href="#">Log-in here!</a></p>
+            </form>
+            
+        </div>
+    </div>
+{% endblock %}

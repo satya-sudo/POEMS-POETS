@@ -1,0 +1,39 @@
+{% extends "poems/layout.html" %}
+
+{% block body %}
+    <div class="container">
+
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-lg-4 col-sm-12 login-quote">
+                {% if requested_user.user_profile.profile_image %}
+                    <img src="{{requested_user.user_profile.profile_image.url }}" width="300px" height = '300px' alt="..." class="cus-img-circle">
+                {% else %}
+                    <i class="fas fa-user-circle fa-10x"></i>
+                {% endif %}
+                {% if self_view %}
+                <form action="{% url 'profile' requested_user.pk  %}" method="post"  enctype="multipart/form-data" >
+                    {% csrf_token %}
+                    <input type="file" accept="/image*" id='file' name='file' class="hidden-stuff">
+                    <label for="file"><i class="fas fa-camera col-12" id='upload_image'></i></label>
+                    
+                </form>    
+                {% endif %}
+            </div>
+
+           <div class="col-lg-8 col-sm-12 profile_details">
+               <h3>{{requested_user.username}}</h3>
+               <div class="name">{{requested_user.user_profile.name}}</div>
+               <div class="about">{{requested_user.user_profile.about |safe }}</div>
+               {% if self_view %}
+                <input id="edit_profile" class="cus-button"  type="submit" value="Edit Profile">
+               {% endif %}
+
+           </div>
+            
+        </div>
+    </div>
+{% endblock %}

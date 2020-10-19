@@ -1,0 +1,39 @@
+{% extends "poems/layout.html" %}
+
+{% block body %}
+    <div class="container">
+        <h2>Create .. </h2>
+
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 login-quote">
+                “some winters
+                will never melt
+
+                some summers
+                will never freeze
+
+                and some things will only
+               live in poems.” 
+            </div>
+
+            <form action="" method="post" class="col-lg-12 col-sm-12">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" autofocus type="text" name="title" placeholder="Give a title to your poem ...">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control cus-textarea" autofocus type="text" name="content" placeholder="Add a discription to your poem .."></textarea>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="radio" name="email" placeholder="Publish!!">
+                </div>
+                <input class="cus-button" type="submit" value="Save and Next">
+            </form>
+            
+        </div>
+    </div>
+{% endblock %}
