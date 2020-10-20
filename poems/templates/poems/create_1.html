@@ -20,7 +20,7 @@
                live in poems.” 
             </div>
 
-            <form action="{% url 'create' %}" method="post" class="col-lg-12 col-sm-12">
+            <form action="{% url 'create' %}" method="post" class="col-lg-12 col-sm-12" id='form-2'>
                 {% csrf_token %}
                 <div class="form-group">
                     <input class="form-control" autofocus type="text" name="title" placeholder="Give a title to your poem ...">
@@ -30,10 +30,12 @@
                 </div>
                 <input type="hidden" name='pk' value={{ pk }}>
                 <input type="hidden" name='part' value="part-2">
-                <label class="form-group">
-                    <input type="checkbox" id='check' name='publish'>
-                    <span class="slider round">Publish...</span>
-                  </label>
+                
+                <label for="inputfd">Publish?</label>
+                    <select  id="inputfd" name='publish' form="form-2">
+                    <option value="Yes">Yes !!</option>
+                    <option value="no">No, its not finshed yet!!</option>
+                </select>
                 <input class="cus-button" type="submit" value="All Done...">
             </form>
             

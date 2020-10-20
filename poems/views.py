@@ -151,7 +151,7 @@ def create(request):
                 pk = int(request.POST['pk'])
                 title = request.POST['title']
                 discription = request.POST['discription']
-                #publish = request.POST['Publish']
+                publish = request.POST['publish']
                 try:
                     poem = Poem.objects.get(pk=pk)
                 except poem.DoesNotExist:
@@ -160,6 +160,10 @@ def create(request):
                     poem.title = title
                 if content_valid_check(discription):
                     poem.discription = discription
+                if publish == 'yes':
+                    poem.published =True
+                else:
+                    poem.published = False        
                 poem.save()
                 return HttpResponseRedirect(reverse("index")) 
                       
