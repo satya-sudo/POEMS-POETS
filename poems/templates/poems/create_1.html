@@ -20,18 +20,21 @@
                live in poems.” 
             </div>
 
-            <form action="" method="post" class="col-lg-12 col-sm-12">
+            <form action="{% url 'create' %}" method="post" class="col-lg-12 col-sm-12">
                 {% csrf_token %}
                 <div class="form-group">
                     <input class="form-control" autofocus type="text" name="title" placeholder="Give a title to your poem ...">
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control cus-textarea" autofocus type="text" name="content" placeholder="Add a discription to your poem .."></textarea>
+                    <textarea class="form-control cus-textarea" autofocus type="text" name="discription" placeholder="Add a discription to your poem .."></textarea>
                 </div>
-                <div class="form-group">
-                    <input class="form-control" type="radio" name="email" placeholder="Publish!!">
-                </div>
-                <input class="cus-button" type="submit" value="Save and Next">
+                <input type="hidden" name='pk' value={{ pk }}>
+                <input type="hidden" name='part' value="part-2">
+                <label class="form-group">
+                    <input type="checkbox" id='check' name='publish'>
+                    <span class="slider round">Publish...</span>
+                  </label>
+                <input class="cus-button" type="submit" value="All Done...">
             </form>
             
         </div>

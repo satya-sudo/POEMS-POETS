@@ -11,6 +11,18 @@ from .models import User,User_profile,Poem
 import json
 
 
+def content_valid_check(content):
+    if len(content) == 0:
+        return False
+    check  = 0
+    for i in content:
+        if i != ' ':
+            check = 1
+    if check == 0:
+        return False
+    else:
+        return True                
+
 
 def handle_json_request(request,data):
     
@@ -124,10 +136,33 @@ def user_view(request,pk):
 
 
 
-def create_1(request):
+def create(request):
     if request.method == "POST":
-        content = request.POST['content']
-        poem = Poem(user=request.user,content=content)
-        poem.save()
+        if request.POST['part'] == 'part-1':
+            content = request.POST['content']
+            if content_valid_check(content):
+                poem = Poem(user=request.user,content=content)
+                poem.save()
+                return render(request,'poems/create_1.html',{'message':'The content of your poem saved..','pk':poem.pk})
+            else:
+                return render(request,'poems/create.html',{'message':'You submitted an empty form..'})  
+        if request.method == "POST":
+            if request.POST['part'] == 'part-2':
+                pk = int(request.POST['pk'])
+                title = request.POST['title']
+                discription = request.POST['discription']
+                #publish = request.POST['Publish']
+                try:
+                    poem = Poem.objects.get(pk=pk)
+                except poem.DoesNotExist:
+                    pass    
+                if content_valid_check(title):
+                    poem.title = title
+                if content_valid_check(discription):
+                    poem.discription = discription
+                poem.save()
+                return HttpResponseRedirect(reverse("index")) 
+                      
+
 
     return render(request,'poems/create.html')        

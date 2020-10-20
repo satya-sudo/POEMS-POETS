@@ -20,11 +20,12 @@
                live in poems.” 
             </div>
 
-            <form action="" method="post" class="col-lg-12 col-sm-12">
+            <form action="{% url 'create' %}" method="post" class="col-lg-12 col-sm-12">
                 {% csrf_token %}
                 <div class="form-group">
-                    <textarea class="form-control cus-textarea" autofocus type="text" name="content" placeholder="Pour your creativity here.."></textarea>
+                    <textarea class="form-control cus-textarea"  name="content" placeholder="Pour your creativity here.."></textarea>
                 </div>
+                <input type="hidden" name='part' value="part-1">
                 <input class="cus-button" type="submit" value="Save and Next">
             </form>
             
