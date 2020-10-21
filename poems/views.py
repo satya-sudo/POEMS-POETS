@@ -10,6 +10,10 @@ from .models import User,User_profile,Poem
 
 import json
 
+from markdown2 import Markdown
+
+markdowner = Markdown()
+
 
 def content_valid_check(content):
     if len(content) == 0:
@@ -134,8 +138,7 @@ def user_view(request,pk):
     except User.DoesNotExist:
         return HttpResponseRedirect(reverse("index")) 
 
-
-
+@login_required
 def create(request):
     if request.method == "POST":
         if request.POST['part'] == 'part-1':
@@ -160,7 +163,7 @@ def create(request):
                     poem.title = title
                 if content_valid_check(discription):
                     poem.discription = discription
-                if publish == 'yes':
+                if publish == 'Yes':
                     poem.published =True
                 else:
                     poem.published = False        
@@ -170,3 +173,12 @@ def create(request):
 
 
     return render(request,'poems/create.html')        
+
+def poem_view(request,pk):
+    try:
+        poem =  Poem.objects.get(pk=pk)
+        content = markdowner.convert(poem.content)
+    except Poem.DoesNotExist:
+        return HttpResponseRedirect(reverse("index")) 
+        
+    return render(request,'poems/poem_view.html',{'poem':poem,'content':content})

@@ -157,3 +157,42 @@ nav{
     text-align: left;
     font-size: 19px;
 }
+
+.poem-header{
+    background-color: whitesmoke;
+    margin-top:20px;
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    justify-content: space-around;
+    text-align: left;
+    font-size: 19px;
+}
+
+.poem-body{
+    margin-top: 20px;
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+
+}
+
+.tool-panel{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    font-family: 'Montserrat', sans-serif;
+    background-color: whitesmoke;
+}
+.tool-items{
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    
+
+}
+
+.tool-items li{
+    list-style: None;
+    cursor:pointer;
+}

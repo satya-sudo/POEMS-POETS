@@ -12,6 +12,12 @@ document.addEventListener('DOMContentLoaded',() =>{
         console.log(err)
         
     }
+    try {
+        document.querySelector('#full-screen').addEventListener('click',() => fullscreentoggle());
+    } catch (err) {
+        console.log(err);
+        
+    }
 })
 
 
@@ -31,7 +37,22 @@ function getCookie(c_name)
         }
     }
     return "";
- }
+}
+
+function fullscreentoggle(){
+    header_div = document.querySelector('#header');
+    x = document.querySelector('#full-screen');
+    if (header_div.style.display === 'flex'){
+        header_div.style.display = 'none';
+        x.innerHTML =  'exit-fullscreen';
+        
+    }else{
+        x.innerHTML =  'full-screen';
+        header_div.style.display = 'flex';
+    }
+
+}
+
 function uplaodProfilePic(){
     file_div = document.querySelector('#file').parentElement
     let submit = document.createElement('input');
