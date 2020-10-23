@@ -21,3 +21,8 @@ class Poem(models.Model):
     published = models.BooleanField(default=False)
     created_on =  models.DateTimeField(auto_now_add=True)
 
+class Comment(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='comment')
+    poem = models.ForeignKey(Poem,on_delete=models.CASCADE,related_name='comments')
+    content = models.TextField(blank=False)
+    commented_on =  models.DateTimeField(auto_now_add=True)

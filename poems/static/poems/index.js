@@ -18,6 +18,16 @@ document.addEventListener('DOMContentLoaded',() =>{
         console.log(err);
         
     }
+    try{
+        document.querySelector('#comment-toggle').addEventListener('click',() => commentbox());
+    } catch (err){
+        console.log(err)
+    }
+    try{
+        document.querySelector('#comment-box-button').addEventListener('click',() => post_comment())
+    } catch (err){
+        console.log(err);
+    }
 })
 
 
@@ -38,6 +48,63 @@ function getCookie(c_name)
     }
     return "";
 }
+
+function commentbox(){
+    comment_pannel = document.querySelector('#comment-box');
+    x = document.querySelector('#comment-toggle');
+    if (comment_pannel.style.display === 'block'){
+        comment_pannel.style.display = 'none';
+        x.innerHTML =  'view-comments';
+        
+    }else{
+        x.innerHTML =  'hide-comments';
+        comment_pannel.style.display = 'block';
+    }
+
+}
+
+
+
+
+
+function post_comment(){
+    let comment =  document.querySelector('#comment-box-text-area').value
+    let location_current = window.location.href;
+    let pk = location_current.split('/')[4];
+    if (comment.length != 0){
+        fetch(location_current,{
+            method: 'PUT',
+            body: JSON.stringify({
+                type: 'comment',
+                pk: pk,
+                comment:comment,
+            }),
+            credentials: 'same-origin',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        });
+        document.querySelector('#comment-box-text-area').value = '';
+        let parent_div  = document.querySelector('#comment-box-text-area').parentElement;
+        
+        let new_comment = document.createElement('div');
+        new_comment.className = "comment-div";
+        let p = document.createElement('p');
+        p.innerHTML = comment;
+        let div_2 = document.createElement('div')
+        div_2.innerHTML = 'Commented just now by YOU!';
+        new_comment.append(p);
+        new_comment.append(div_2);
+        console.log(parent_div)
+        parent_div.append(document.createElement('hr'))
+        parent_div.append(new_comment)
+    }else{
+        pass
+    }
+
+}
+
+
 
 function fullscreentoggle(){
     header_div = document.querySelector('#header');

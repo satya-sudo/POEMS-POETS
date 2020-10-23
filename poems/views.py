@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 
-from .models import User,User_profile,Poem
+from .models import User,User_profile,Poem,Comment
 
 import json
 
@@ -42,6 +42,19 @@ def handle_json_request(request,data):
 
         except User.DoesNotExist:
             return 
+    elif data['type'] == 'comment' :
+        try:
+            user_requested =  User.objects.get(pk=request.user.pk)
+        except User.DoesNotExist:
+            return
+        try:
+            poem =  Poem.objects.get(pk= data['pk'])
+        except Poem.DoesNotExist:
+            return
+        comment = Comment(user = user_requested,poem= poem,content=data['comment'])      
+        comment.save()
+
+
 
 # index view
 def index(request):
@@ -175,10 +188,16 @@ def create(request):
     return render(request,'poems/create.html')        
 
 def poem_view(request,pk):
+    if request.method == 'PUT':
+        data = json.loads(request.body)
+        handle_json_request(request,data)
+
     try:
         poem =  Poem.objects.get(pk=pk)
         content = markdowner.convert(poem.content)
     except Poem.DoesNotExist:
         return HttpResponseRedirect(reverse("index")) 
-        
-    return render(request,'poems/poem_view.html',{'poem':poem,'content':content})
+
+    comments = Comment.objects.all().filter(poem=poem).order_by('-commented_on')[:10]
+
+    return render(request,'poems/poem_view.html',{'poem':poem,'content':content,'comments':comments})

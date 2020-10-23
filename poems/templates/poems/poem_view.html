@@ -26,9 +26,34 @@
             <div class='col-lg-12 tool-panel'>
                 <ul class="tool-items">
                     <li>Like</li>
-                    <li>comment</li>
+                    <li id='comment-toggle'>view-comments</li>
                     <li id='full-screen'>full-screen</li>
                 </ul>
+            </div>
+            <div id='comment-box' class='col-lg-12 comments-pannel'>
+                <h4>Comments...</h4>
+                <hr>
+                {% if user.is_authenticated %}
+                    <div>
+                        <textarea style="width: 100%;" id='comment-box-text-area'></textarea>
+                        <input type='submit' value="comment!" id='comment-box-button'>
+                    </div>
+                {% else %}
+                    <div>login to add a comment</div>
+                {% endif %}
+
+                <hr>
+                {% for i in comments %}
+                    <div class="comment-div">
+                        <p>{{i.content}}</p>
+                        <div>by {{i.user.username}} on {{i.commented_on}}</div>
+                    </div>
+                    <hr>
+                {% empty %}
+                    <div id='comment-empty'>
+                        No comments yet ... 
+                    </div>
+                {% endfor %}
             </div>
             <div class="col-lg-12">
                 {{content |safe}}
