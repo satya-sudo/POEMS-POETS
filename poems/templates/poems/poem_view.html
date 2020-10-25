@@ -7,10 +7,10 @@
             <div class="message">{{ message }}</div>
         {% endif %}
 
-        <div class="row" id="header">
+        <div class="row" style="display: flex;" id="header">
 
             <div class="col-lg-4 col-sm-12 login-quote">
-                <i class="fas fa-user-circle fa-10x"></i>   
+                <img src="{{poem.cover_image.url}}" alt="">
             </div>
 
             <div class="col-lg-8 col-sm-12 poem-header">
@@ -25,9 +25,17 @@
         <div class="row poem-body" id='body'>
             <div class='col-lg-12 tool-panel'>
                 <ul class="tool-items">
-                    <li>Like</li>
-                    <li id='comment-toggle'>view-comments</li>
-                    <li id='full-screen'>full-screen</li>
+                    {% if user_logged %}
+                        {% if libray %}
+                            <li id='n_ur'>unLike</li>
+                        {% else %}
+                            <li id='i_ur'>Like</li>
+                        {% endif %}
+                    {% else %}
+                        <li id='d_ur'>ddLike</li>
+                    {% endif %}
+                    <li id='comment-toggle'><i class="fas fa-comments"></i></li>
+                    <li id='full-screen'><i class="fas fa-expand"></i></li>
                 </ul>
             </div>
             <div id='comment-box' class='col-lg-12 comments-pannel'>

@@ -6,7 +6,9 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 
-from .models import User,User_profile,Poem,Comment
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+
+from .models import User,User_profile,Poem,Comment,Library
 
 import json
 
@@ -54,11 +56,54 @@ def handle_json_request(request,data):
         comment = Comment(user = user_requested,poem= poem,content=data['comment'])      
         comment.save()
 
+    elif data['type'] == 'remove_library':
+        try:
+            requested_user = User.objects.get(pk= request.user.pk)
+        except User.DoesNotExist:
+            return 
+        try:
+            requested_poem = Poem.objects.get(pk=data['pk']) 
+        except Poem.DoesNotExist:
+            return
+        try:
+            l = Library.objects.get(user=requested_user,poem=requested_poem)
+            l.delete()
+        except Library.DoesNotExist:
+            return
+    elif data['type'] == 'add_library':
+        try:
+            requested_user = User.objects.get(pk= request.user.pk)
+        except User.DoesNotExist:
+            return 
+        try:
+            requested_poem = Poem.objects.get(pk=data['pk']) 
+        except Poem.DoesNotExist:
+            return
+        try:
+            l = Library.objects.get(user=requested_user,poem=requested_poem)      
+            return
+        except Library.DoesNotExist:
+            l = Library(user=requested_user,poem=requested_poem) 
+            l.save()
+            return
 
+def pignate(request,posts):
+    page = request.GET.get('page',1)
+    paginator = Paginator(posts,10)
+
+    try:
+        post_page = paginator.page(page)
+    except PageNotAnInteger:
+        post_page  = paginator.page(1)
+    except EmptyPage:
+        post_page = paginator.page(paginator.num_pages)
+
+    return post_page   
 
 # index view
 def index(request):
-    return render(request,"poems/index.html")
+    all_poems = Poem.objects.all().filter(published=True).order_by('-created_on')
+    return render(request,"poems/index.html",{'posts':pignate(request,all_poems)})
 
 # login view 
 def login_view(request):
@@ -121,6 +166,7 @@ def register(request):
     else:
         return render(request,"poems/register.html")       
 
+
 # User profile view
 def user_view(request,pk):
 
@@ -141,13 +187,14 @@ def user_view(request,pk):
         if requested_user == request.user:
             self_view = True
 
+        poems = Poem.objects.all().filter(user=requested_user)
 
         return render(request,"poems/profile.html",{
             "requested_user":requested_user,
-            'self_view':self_view
+            'self_view':self_view,'posts':pignate(request,poems)
 
         }) 
-
+    
     except User.DoesNotExist:
         return HttpResponseRedirect(reverse("index")) 
 
@@ -198,6 +245,21 @@ def poem_view(request,pk):
     except Poem.DoesNotExist:
         return HttpResponseRedirect(reverse("index")) 
 
+    user_logged = True
+    library = False
+    try:
+        user = User.objects.get(pk= request.user.pk)
+    except User.DoesNotExist:
+        user_logged = False
+        
+    if user_logged:
+        for each in user.library.all():
+            if each.poem.pk == pk:
+                library = True
+                break
+
+
+
     comments = Comment.objects.all().filter(poem=poem).order_by('-commented_on')[:10]
 
-    return render(request,'poems/poem_view.html',{'poem':poem,'content':content,'comments':comments})
+    return render(request,'poems/poem_view.html',{'poem':poem,'content':content,'comments':comments,'user_logged':user_logged,'library':library})

@@ -28,6 +28,21 @@ document.addEventListener('DOMContentLoaded',() =>{
     } catch (err){
         console.log(err);
     }
+    try{
+        document.querySelector('#i_ur').addEventListener('click',() => add_to_libray())
+    } catch (err){
+        console.log(err);
+    }
+    try{
+        document.querySelector('#n_ur').addEventListener('click',() => remove_from_libray())
+    } catch (err){
+        console.log(err);
+    }
+    try{
+        document.querySelector('#d_ur').addEventListener('click',() => disabled_libray())
+    } catch (err){
+        console.log(err);
+    }
 })
 
 
@@ -54,18 +69,68 @@ function commentbox(){
     x = document.querySelector('#comment-toggle');
     if (comment_pannel.style.display === 'block'){
         comment_pannel.style.display = 'none';
-        x.innerHTML =  'view-comments';
+        x.innerHTML =  '<i class="fas fa-comments"></i>';
         
     }else{
-        x.innerHTML =  'hide-comments';
+        x.innerHTML =  '<i class="far fa-comments"></i>';
         comment_pannel.style.display = 'block';
     }
 
 }
 
 
+function add_to_libray(){
+    let location_current = window.location.href;
+    let pk = location_current.split('/')[4];
+    
+    fetch(location_current,{
+        method: 'PUT',
+        body: JSON.stringify({
+            type: 'add_library',
+            pk: pk
+        }),
+        credentials: 'same-origin',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    });
+    let s = document.querySelector('#i_ur');
+    s.id = 'n_ur';
+    s.innerHTML ='unLike'
+    try{
+        document.querySelector('#n_ur').addEventListener('click',() => remove_from_libray())
+    } catch (err){
+        console.log(err);
+    }
+}
 
 
+
+function remove_from_libray(){
+    let location_current = window.location.href;
+    let pk = location_current.split('/')[4];
+    
+    fetch(location_current,{
+        method: 'PUT',
+        body: JSON.stringify({
+            type: 'remove_library',
+            pk: pk
+        }),
+        credentials: 'same-origin',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    });
+    let s = document.querySelector('#n_ur');
+    s.id = 'i_ur';
+    s.innerHTML = 'like'
+    //setTimeout()
+    try{
+        document.querySelector('#i_ur').addEventListener('click',() => add_to_libray())
+    } catch (err){
+        console.log(err);
+    }
+}
 
 function post_comment(){
     let comment =  document.querySelector('#comment-box-text-area').value
@@ -109,12 +174,12 @@ function post_comment(){
 function fullscreentoggle(){
     header_div = document.querySelector('#header');
     x = document.querySelector('#full-screen');
-    if (header_div.style.display === 'flex'){
+    if (header_div.style.display === 'flex' || header_div.style.display === 'inline-block'){
         header_div.style.display = 'none';
-        x.innerHTML =  'exit-fullscreen';
+        x.innerHTML =  '<i class="fas fa-compress"></i>';
         
     }else{
-        x.innerHTML =  'full-screen';
+        x.innerHTML =  '<i class="fas fa-expand"></i>';
         header_div.style.display = 'flex';
     }
 
