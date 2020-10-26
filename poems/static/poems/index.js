@@ -96,7 +96,7 @@ function add_to_libray(){
     });
     let s = document.querySelector('#i_ur');
     s.id = 'n_ur';
-    s.innerHTML ='unLike'
+    s.innerHTML ='<i class="fas fa-book-reader"></i>'
     try{
         document.querySelector('#n_ur').addEventListener('click',() => remove_from_libray())
     } catch (err){
@@ -123,7 +123,7 @@ function remove_from_libray(){
     });
     let s = document.querySelector('#n_ur');
     s.id = 'i_ur';
-    s.innerHTML = 'like'
+    s.innerHTML = '<i class="fas fa-book-open"></i>'
     //setTimeout()
     try{
         document.querySelector('#i_ur').addEventListener('click',() => add_to_libray())

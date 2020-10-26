@@ -27,9 +27,9 @@
             <ul class="cus-nav-links">
                 <li><a href="{% url 'index' %}">Home</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="#">You</a></li>
-                    <li><a href="#">Create</a></li>
-                    <li><a href="#">Libary</a></li>
+                    <li><a href="{% url 'profile' user.pk %}">You</a></li>
+                    <li><a href="{% url 'create' %}">Create</a></li>
+                    <li><a href="{% url 'library_view' %}">Libary</a></li>
                     <li><a href="{% url 'logout' %}">LogOut</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}">LogIn</a></li>

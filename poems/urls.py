@@ -9,6 +9,8 @@ urlpatterns = [
     path("profile/<int:pk>",views.user_view,name="profile"),
     path("create",views.create,name="create"),
     path("poem/<int:pk>",views.poem_view,name="poem_view"),
+    path("library",views.library_view,name="library_view"),
+
 
 
 

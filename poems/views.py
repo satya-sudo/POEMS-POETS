@@ -189,9 +189,11 @@ def user_view(request,pk):
 
         poems = Poem.objects.all().filter(user=requested_user)
 
+        nav  = True if len(poems) !=0 else False
+
         return render(request,"poems/profile.html",{
             "requested_user":requested_user,
-            'self_view':self_view,'posts':pignate(request,poems)
+            'self_view':self_view,'posts':pignate(request,poems),'nav':nav
 
         }) 
     
@@ -215,10 +217,11 @@ def create(request):
                 title = request.POST['title']
                 discription = request.POST['discription']
                 publish = request.POST['publish']
+                
                 try:
-                    poem = Poem.objects.get(pk=pk)
+                    poem = Poem.objects.get(pk=pk,user=request.user)
                 except poem.DoesNotExist:
-                    pass    
+                    return HttpResponseRedirect(reverse("index")) 
                 if content_valid_check(title):
                     poem.title = title
                 if content_valid_check(discription):
@@ -226,7 +229,11 @@ def create(request):
                 if publish == 'Yes':
                     poem.published =True
                 else:
-                    poem.published = False        
+                    poem.published = False    
+                try:
+                    poem.cover_image = request.FILES['file'] 
+                except:
+                    pass       
                 poem.save()
                 return HttpResponseRedirect(reverse("index")) 
                       
@@ -263,3 +270,10 @@ def poem_view(request,pk):
     comments = Comment.objects.all().filter(poem=poem).order_by('-commented_on')[:10]
 
     return render(request,'poems/poem_view.html',{'poem':poem,'content':content,'comments':comments,'user_logged':user_logged,'library':library})
+
+
+@login_required
+def library_view(request):
+    poems = Library.objects.all().filter(user=request.user).order_by('-added_on')
+    nav  = True if len(poems) !=0 else False
+    return render(request,'poems/library.html',{'posts':pignate(request,poems),'nav':nav})

@@ -46,8 +46,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{i.title}}</h5>
                   <p class="card-text">{{i.discription}}</p>
-                  <h6>by {{i.user.username}}</h6>
-                  <button class="cus-button-2"><a href="#" >view-poem</a></button>
+                  <button class="cus-button-2"><a href="{% url 'poem_view' i.pk %}" >view-poem</a></button>
                 </div>
             </div>
             {% empty %}
@@ -60,6 +59,7 @@
     
     </div>
     
+    {% if nav %}
     <nav style="padding-top: 10px;
     margin-top: 15px;">
         <ul class="pagination">
@@ -98,7 +98,7 @@
           
         </ul>
     </nav>
-
+    {% endif %}
 
     </div>
 {% endblock %}

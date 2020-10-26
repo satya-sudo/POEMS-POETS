@@ -4,34 +4,34 @@
     <div class="container-xl container-lg container-md container-sm">
         <h1  class='opening'style="padding: 10px;">Poems & poets</h1>
         <div class="login-quote">
-            “Poetry is ordinary language raised to the Nth power.
-             Poetry is boned with ideas, nerved and blooded with emotions,
-              all held together by the delicate, tough skin of words.”
-            
+            "Libraries store the energy that fuels the imagination. 
+            They open up windows to the world and inspire us to explore and achieve, 
+            and contribute to improving our quality of life."
         </div>
 
-        <h1 style="padding: 10px;">Discover...</h1>
+        <h1 style="padding: 10px;">Continue reading ...</h1>
         
 
         <div class="row">
             {% for i in posts %}
             <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                <img src="{{i.cover_image.url}}" class="card-img-top" alt="...">
+                <img src="{{i.poem.cover_image.url}}" class="card-img-top" alt="{{i.poem.title}}">
                 <div class="card-body">
-                  <h5 class="card-title">{{i.title}}</h5>
-                  <p class="card-text">{{i.discription}}</p>
-                  <h6 style="padding:2px;">By <a style='text-decoration: none; color: black;padding:2px;' href="{% url 'profile' i.user.pk %}">{{i.user.username}}</a</h6>
-                  <button class="cus-button-2"><a href="{% url 'poem_view' i.pk %}" >view-poem</a></button>
+                  <h5 class="card-title">{{i.poem.title}}</h5>
+                  <p class="card-text">{{i.poem.discription}}</p>
+                  <h6>by {{i.poem.user.username}}</h6>
+                  <button class="cus-button-2"><a href="{% url 'poem_view' i.poem.pk %}" >view-poem</a></button>
                 </div>
               </div>
-
-
+            {% empty %} 
+              <h2 style="padding-top: 10px;">Your library is yet to be stocked!</h2>
             {% endfor %}
         </div>
     
     
     </div>
 
+    {% if nav %}
     <nav style="padding-top: 10px;">
         <ul class="pagination">
         {% if posts.has_previous %}
@@ -69,5 +69,5 @@
           
         </ul>
     </nav>
-
+    {% endif %}
 {% endblock %}

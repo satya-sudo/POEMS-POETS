@@ -27,12 +27,12 @@
                 <ul class="tool-items">
                     {% if user_logged %}
                         {% if libray %}
-                            <li id='n_ur'>unLike</li>
+                            <li id='n_ur'><i class="fas fa-book-reader"></i></li>
                         {% else %}
-                            <li id='i_ur'>Like</li>
+                            <li id='i_ur'><i class="fas fa-book-open"></i></li>
                         {% endif %}
                     {% else %}
-                        <li id='d_ur'>ddLike</li>
+                        <li id='d_ur'><i class="fas fa-sign-in-alt"></i></li>
                     {% endif %}
                     <li id='comment-toggle'><i class="fas fa-comments"></i></li>
                     <li id='full-screen'><i class="fas fa-expand"></i></li>
