@@ -10,10 +10,5 @@ urlpatterns = [
     path("create",views.create,name="create"),
     path("poem/<int:pk>",views.poem_view,name="poem_view"),
     path("library",views.library_view,name="library_view"),
-
-
-
-
-
-
+    path("edit/<int:pk>",views.edit_poem,name="edit_poem"),
 ]

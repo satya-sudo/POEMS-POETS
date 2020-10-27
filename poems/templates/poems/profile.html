@@ -46,7 +46,10 @@
                 <div class="card-body">
                   <h5 class="card-title">{{i.title}}</h5>
                   <p class="card-text">{{i.discription}}</p>
-                  <button class="cus-button-2"><a href="{% url 'poem_view' i.pk %}" >view-poem</a></button>
+                  <button class="cus-button-2" style="margin-top: 15px;"><a href="{% url 'poem_view' i.pk %}" >view-poem</a></button>
+                  {% if self_view %}
+                    <button class="cus-button-2" style="margin-top: 15px;"><a href="{% url 'edit_poem' i.pk %}" >edit</a></button>
+                {% endif %}
                 </div>
             </div>
             {% empty %}

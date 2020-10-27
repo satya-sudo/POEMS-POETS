@@ -1,0 +1,46 @@
+{% extends "poems/layout.html" %}
+
+{% block body %}
+    <div class="container">
+        <h2>Edit your poem .. </h2>
+
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 login-quote">
+                “some winters
+                will never melt
+
+                some summers
+                will never freeze
+
+                and some things will only
+               live in poems.” 
+            </div>
+
+            <form action="{% url 'edit_poem' poem.pk %}" method="post" id='form-2' class="col-lg-12 col-sm-12" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea class="form-control cus-textarea"  name="content" placeholder="Pour your creativity here..">{{poem.content}}</textarea>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" autofocus type="text" name="title" placeholder="Give a title to your poem ..." value="{{poem.title}}">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control cus-textarea" autofocus type="text" name="discription" placeholder="Add a discription to your poem ..">{{poem.discription}}</textarea>
+                </div>
+                <label for="inputfd">Publish?</label>
+                    <select  id="inputfd" name='publish' form="form-2">
+                    <option value="Yes">Yes !!</option>
+                    <option value="no">No, its not finshed yet!!</option>
+                </select>
+                <input type="file" accept="/image*" id='xfile' name='file' class="hidden-stuff">
+                <label for="xfile"> <i class="fas fa-camera col-12" > Add a cover image</i></label>
+                <input class="cus-button" type="submit" value="Save and Next">
+            </form>
+            
+        </div>
+    </div>
+{% endblock %}

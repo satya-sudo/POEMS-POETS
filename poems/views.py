@@ -277,3 +277,50 @@ def library_view(request):
     poems = Library.objects.all().filter(user=request.user).order_by('-added_on')
     nav  = True if len(poems) !=0 else False
     return render(request,'poems/library.html',{'posts':pignate(request,poems),'nav':nav})
+
+
+@login_required
+def edit_poem(request,pk):
+    if request.method == 'POST':
+        try:
+            poem =  Poem.objects.get(pk=pk,user=request.user)
+            content = request.POST['content']
+            if content_valid_check(content):
+                poem.content = content
+           
+            title = request.POST['title']
+            discription = request.POST['discription']
+            publish = request.POST['publish']
+            
+            if content_valid_check(title):
+                poem.title = title
+            if content_valid_check(discription):
+                poem.discription = discription
+            x = ''    
+            if publish == 'Yes':
+                poem.published =True
+                x = 'The poem is published!'
+            else:
+                poem.published = False  
+                x = 'The poem is still not pubhlished yet'
+
+            old_image = poem.cover_image    
+            try:
+                poem.cover_image = request.FILES['file'] 
+            except:
+                poem.cover_image = old_image  
+
+            poem.save()
+            message = 'all new changes have been saved!' + x
+
+        except Poem.DoesNotExist:
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        message = ''   
+
+    try:
+        poem =  Poem.objects.get(pk=pk,user=request.user)
+        return render(request,'poems/edit.html',{'poem':poem,'message':message})
+    except Poem.DoesNotExist:
+        return HttpResponseRedirect(reverse('index'))
+
