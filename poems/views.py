@@ -200,6 +200,7 @@ def user_view(request,pk):
     except User.DoesNotExist:
         return HttpResponseRedirect(reverse("index")) 
 
+# create poems 
 @login_required
 def create(request):
     if request.method == "POST":
@@ -241,6 +242,7 @@ def create(request):
 
     return render(request,'poems/create.html')        
 
+# view poems
 def poem_view(request,pk):
     if request.method == 'PUT':
         data = json.loads(request.body)
@@ -264,14 +266,14 @@ def poem_view(request,pk):
             if each.poem.pk == pk:
                 library = True
                 break
-
-
+                
 
     comments = Comment.objects.all().filter(poem=poem).order_by('-commented_on')[:10]
 
     return render(request,'poems/poem_view.html',{'poem':poem,'content':content,'comments':comments,'user_logged':user_logged,'library':library})
 
 
+# user library
 @login_required
 def library_view(request):
     poems = Library.objects.all().filter(user=request.user).order_by('-added_on')
@@ -279,6 +281,7 @@ def library_view(request):
     return render(request,'poems/library.html',{'posts':pignate(request,poems),'nav':nav})
 
 
+# poems
 @login_required
 def edit_poem(request,pk):
     if request.method == 'POST':

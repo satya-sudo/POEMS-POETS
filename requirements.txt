@@ -1,0 +1,7 @@
+Django==3.1.2
+markdown2==2.3.10
+Pillow==8.0.0
+requests==2.22.0
+simplejson==3.16.0
+six==1.14.0
+sqlparse==0.4.1
