@@ -1,0 +1,107 @@
+{% extends "poems/layout.html" %}
+
+{% block body %}
+    <div class="container">
+
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-lg-4 col-sm-12 login-quote">
+                {% if requested_user.user_profile.profile_image %}
+                    <img src="{{requested_user.user_profile.profile_image.url }}" width="300px" height = '300px' alt="..." class="cus-img-circle">
+                {% else %}
+                    <i class="fas fa-user-circle fa-10x"></i>
+                {% endif %}
+                {% if self_view %}
+                <form action="{% url 'profile' requested_user.pk  %}" method="post"  enctype="multipart/form-data" >
+                    {% csrf_token %}
+                    <input type="file" accept="/image*" id='file' name='file' class="hidden-stuff">
+                    <label for="file"><i class="fas fa-camera col-12" id='upload_image'></i></label>
+                    
+                </form>    
+                {% endif %}
+            </div>
+
+           <div class="col-lg-8 col-sm-12 profile_details">
+               <h3>{{requested_user.username}}</h3>
+               <div class="name">{{requested_user.user_profile.name}}</div>
+               <div class="about">{{requested_user.user_profile.about |safe }}</div>
+               {% if self_view %}
+                <input id="edit_profile" class="cus-button"  type="submit" value="Edit Profile">
+               {% endif %}
+
+           </div>
+            
+        </div>
+
+        <h3 style="padding: 10px;">All poems by {{requested_user.username}}..</h3>
+        
+
+        <div class="row">
+            {% for i in posts %}
+            <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                <img src="{{i.cover_image.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{i.title}}</h5>
+                  <p class="card-text">{{i.discription}}</p>
+                  <button class="cus-button-2" style="margin-top: 15px;"><a href="{% url 'poem_view' i.pk %}" >view-poem</a></button>
+                  {% if self_view %}
+                    <button class="cus-button-2" style="margin-top: 15px;"><a href="{% url 'edit_poem' i.pk %}" >edit</a></button>
+                {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <h5> This user has not posted any poems yet... </h5>
+
+
+            {% endfor %}
+        </div>
+    
+    
+    </div>
+    
+    {% if nav %}
+    <nav style="padding-top: 10px;
+    margin-top: 15px;">
+        <ul class="pagination">
+        {% if posts.has_previous %}
+            <li class="page-item">
+                <a href ="?page={{ posts.previous_page_number}}" class="page-link">Previous</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <span class="page-link"><i class="fas fa-arrow-left"></i></span>
+            </li>
+        {% endif %}
+         
+        {% for i in posts.paginator.page_range %}
+            {% if i == posts.number %}
+                <li class="page-item active">
+                <span class="page-link">
+                  {{ i }}
+                <span class="sr-only">(current)</span>
+                </span>
+                </li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+                   
+        {% endfor %}  
+        {% if posts.has_next %}
+            <li class="page-item">
+                <a href ="?page={{ posts.next_page_number }}" class="page-link">Next</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <span class="page-link"><i class="fas fa-arrow-right"></i></span>
+            </li>
+        {% endif %}
+          
+        </ul>
+    </nav>
+    {% endif %}
+
+    </div>
+{% endblock %}

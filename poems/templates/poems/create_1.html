@@ -1,0 +1,54 @@
+{% extends "poems/layout.html" %}
+
+{% block body %}
+    <div class="container">
+        <h2>Create .. </h2>
+
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 login-quote">
+                “some winters
+                will never melt
+
+                some summers
+                will never freeze
+
+                and some things will only
+               live in poems."
+            </div>
+            <div class="col-lg-12 col-sm-12 login-quote">   
+               <ul>
+               <li style="list-style: none;"> the fields in this step are not mandatory </li>
+               
+               <li  style="list-style: none;"> when uploading a cover image we recommend a 614x900 portrait</li>
+              
+                </ul>
+            </div>
+
+            <form action="{% url 'create' %}" method="post" class="col-lg-12 col-sm-12" id='form-2' enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" autofocus type="text" name="title" placeholder="Give a title to your poem ...">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control cus-textarea" autofocus type="text" name="discription" placeholder="Add a discription to your poem .."></textarea>
+                </div>
+                <input type="hidden" name='pk' value={{ pk }}>
+                <input type="hidden" name='part' value="part-2">
+                
+                <label for="inputfd">Publish?</label>
+                    <select  id="inputfd" name='publish' form="form-2">
+                    <option value="Yes">Yes !!</option>
+                    <option value="no">No, its not finshed yet!!</option>
+                </select>
+                <input type="file" accept="/image*" id='xfile' name='file' class="hidden-stuff">
+                <label for="xfile"> <i class="fas fa-camera col-12" id='upload_image'> Add a cover image</i></label>
+                <input class="cus-button" type="submit" value="All Done...">
+            </form>
+            
+        </div>
+    </div>
+{% endblock %}

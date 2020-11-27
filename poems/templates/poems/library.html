@@ -1,0 +1,73 @@
+{% extends "poems/layout.html" %}
+
+{% block body %}
+    <div class="container-xl container-lg container-md container-sm">
+        <h1  class='opening'style="padding: 10px;">Poems & poets</h1>
+        <div class="login-quote">
+            "Libraries store the energy that fuels the imagination. 
+            They open up windows to the world and inspire us to explore and achieve, 
+            and contribute to improving our quality of life."
+        </div>
+
+        <h1 style="padding: 10px;">Continue reading ...</h1>
+        
+
+        <div class="row">
+            {% for i in posts %}
+            <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                <img src="{{i.poem.cover_image.url}}" class="card-img-top" alt="{{i.poem.title}}">
+                <div class="card-body">
+                  <h5 class="card-title">{{i.poem.title}}</h5>
+                  <p class="card-text">{{i.poem.discription}}</p>
+                  <h6>by {{i.poem.user.username}}</h6>
+                  <button class="cus-button-2"><a href="{% url 'poem_view' i.poem.pk %}" >view-poem</a></button>
+                </div>
+              </div>
+            {% empty %} 
+              <h2 style="padding-top: 10px;">Your library is yet to be stocked!</h2>
+            {% endfor %}
+        </div>
+    
+    
+    </div>
+
+    {% if nav %}
+    <nav style="padding-top: 10px;">
+        <ul class="pagination">
+        {% if posts.has_previous %}
+            <li class="page-item">
+                <a href ="?page={{ posts.previous_page_number}}" class="page-link">Previous</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <span class="page-link"><i class="fas fa-arrow-left"></i></span>
+            </li>
+        {% endif %}
+         
+        {% for i in posts.paginator.page_range %}
+            {% if i == posts.number %}
+                <li class="page-item active">
+                <span class="page-link">
+                  {{ i }}
+                <span class="sr-only">(current)</span>
+                </span>
+                </li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+                   
+        {% endfor %}  
+        {% if posts.has_next %}
+            <li class="page-item">
+                <a href ="?page={{ posts.next_page_number }}" class="page-link">Next</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <span class="page-link"><i class="fas fa-arrow-right"></i></span>
+            </li>
+        {% endif %}
+          
+        </ul>
+    </nav>
+    {% endif %}
+{% endblock %}
