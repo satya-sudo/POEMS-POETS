@@ -1,514 +1,74 @@
+nav {
 
-@media (prefers-color-scheme: light) {
-    *{
-        margin: 0px;
-        padding: 0px;
-        box-sizing: border-box;
-    }
-    
-    nav{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        min-height: 8vh;
-        font-family: 'Montserrat', sans-serif;
-        background-color: whitesmoke;
-    }
-    
-    .custom-logo{
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        font-size: 20px;
-    }
-    
-    .cus-nav-links{
-        display: flex;
-        justify-content: space-around;
-        width: 40%;
-    }
-    .cus-nav-links li{
-        list-style: None;
-    }
-    
-    .cus-nav-links a{
-        color: black;
-        text-decoration: None;
-        letter-spacing: 3px;
-        font-weight: bold;
-        font-size: 16px;
-    }
-    .cus_burger{
-        display: None;
-    }
-    .cus_burger div{
-        width: 25px;
-        height: 3px;
-        background-color: black;
-        margin: 5px;
-    }
-    
-    @media screen and (max-width:900px){
-        body{
-            overflow-x: hidden;
-        }
-        .cus-nav-links{
-            background-color: whitesmoke;
-            position: absolute;
-            right: 0px;
-            height: 92vh;
-            top:8vh;
-            z-index: 10;
-            display:flex;
-            flex-direction: column;
-            align-items: center;
-            width: 50%;
-            transform: translateX(100%);
-            transition: transform 0.5s ease-in;
-    
-        }
-        .cus-nav-links li{
-            opacity: 0;
-    
-        }
-        .cus_burger{
-            display: block;
-        }
-    }    
-    
-    .cus-nav-active{
-        transform: translateX(0%);
-    }
-    
-    @keyframes navLinkFade{
-        from{
-            opacity: 0;
-            transform: translateX(50px);
-        }
-        to{
-            opacity: 1;
-            transform: translateX(0px);
-        }
-    }
-    
-    .container{
-        margin-top: 20px;
-        font-family: 'Montserrat', sans-serif;
-        justify-content: space-around;
-       
-    }
-    .container form{
-        margin-top:20px;
-        padding: 10px;
-        justify-content: space-around;
-    }
-    
-    .login-quote{
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        margin-top:20px;
-        padding: 10px;
-        font-family: 'Montserrat', sans-serif;
-        justify-content: space-around;
-        font-size: 25px;
-        text-align: center;
-        background-color: whitesmoke;
-    }
-    
-    .message{
-        color: tomato;
-    }
-    
-    .cus-button{
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        width: 100%;
-        padding: 5px;
-    }
-    
-    .profile_details{
-        margin-top:20px;
-        padding: 10px;
-        font-family: 'Montserrat', sans-serif;
-        justify-content: space-around;
-        text-align: left;
-        font-size: 19px;
-        
-    }
-    
-    .inputarea{
-        letter-spacing: 5px;
-        width: 100%;
-        padding: 5px;
-    }
-    
-    .cus-img-circle {
-        width: 300px;
-        border-radius: 50%;
-    }
-    
-    .hidden-stuff {
-        display: none;
-    }
-    
-    .cus-textarea{
-        min-height: 80vh;
-        margin-top:20px;
-        padding: 10px;
-        font-family: 'Montserrat', sans-serif;
-        justify-content: space-around;
-        text-align: left;
-        font-size: 19px;
-    }
-    
-    .poem-header{
-        background-color: whitesmoke;
-        margin-top:20px;
-        padding: 10px;
-        font-family: 'Montserrat', sans-serif;
-        justify-content: space-around;
-        text-align: left;
-        font-size: 19px;
-    }
-    
-    .poem-body{
-        margin-top: 20px;
-        padding: 10px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 22px;
-    
-    }
-    
-    .tool-panel{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        min-height: 8vh;
-        font-family: 'Montserrat', sans-serif;
-        background-color: whitesmoke;
-    }
-    .tool-items{
-        display: flex;
-        justify-content: space-around;
-        width: 80%;
-        margin-bottom: 0%;
-        
-    }
-    
-    .tool-items li{
-        list-style: None;
-        cursor:pointer;
-    
-    }
-    
-    hr{
-        color: 2px black solid;
-    }
-    
-    .comments-pannel{
-        display: none;
-        background-color: whitesmoke;
-        margin-top: 20px;
-        padding: 10px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 16px;
-    
-    }
-    
-    .comment-div p {
-        font-size: 18px;
-    }
-    
-    .valer{
-        display: flex;
-    }
-    
-    .card{
-        margin-left: 0px;
-        margin-right: 0px;
-        padding-left: 0px;
-        padding-right: 0px;
-        background-color: whitesmoke;
-        font-family: 'Montserrat', sans-serif;
-    
-    }
-    
-    .opening{
-        text-transform: uppercase;
-        font-family: 'Montserrat', sans-serif;
-        letter-spacing: 5px;
-    }
-    
-    .cus-button-2{
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        width: 100%;
-        padding: 5px;
-        border: white 2px solid;
-        border-radius: 2px;
-        background-color: white;
-        width: 100%;
-        text-align: center;
-    }
+    font-family: 'Montserrat', sans-serif;
+    border-bottom: 1px solid #ddd;
+    padding: 0.5em;
+    height: 8vh;
+    background-color: #F6F6F6;
+}
+
+.Header {
+    font-family: 'Montserrat', sans-serif;
+    padding: 1.5em;
+}
+
+.login-quote{
+    padding-bottom: 1.5rem;
 }
 
 
-@media (prefers-color-scheme: dark) {
-    *{
-        margin: 0px;
-        padding: 0px;
-        box-sizing: border-box;
-        color: white;
-        
-    }
-    body{
-        background-color: black;
-    }
-    nav{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        min-height: 8vh;
-        font-family: 'Montserrat', sans-serif;
-        background-color: #332940;
-    }
-    
-    .custom-logo{
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        font-size: 20px;
-    }
-    
-    .cus-nav-links{
-        display: flex;
-        justify-content: space-around;
-        width: 40%;
-    }
-    .cus-nav-links li{
-        list-style: None;
-    }
-    
-    .cus-nav-links a{
-        color: white;
-        text-decoration: None;
-        letter-spacing: 3px;
-        font-weight: bold;
-        font-size: 16px;
-    }
-    .cus_burger{
-        display: None;
-    }
-    .cus_burger div{
-        width: 25px;
-        height: 3px;
-        background-color: white;
-        margin: 5px;
-    }
-    
-    @media screen and (max-width:900px){
-        body{
-            overflow-x: hidden;
-        }
-        .cus-nav-links{
-            background-color: #332940;
-            position: absolute;
-            right: 0px;
-            height: 92vh;
-            top:8vh;
-            z-index: 10;
-            display:flex;
-            flex-direction: column;
-            align-items: center;
-            width: 50%;
-            transform: translateX(100%);
-            transition: transform 0.5s ease-in;
-    
-        }
-        .cus-nav-links li{
-            opacity: 0;
-    
-        }
-        .cus_burger{
-            display: block;
-        }
-    }    
-    
-    .cus-nav-active{
-        transform: translateX(0%);
-    }
-    
-    @keyframes navLinkFade{
-        from{
-            opacity: 0;
-            transform: translateX(50px);
-        }
-        to{
-            opacity: 1;
-            transform: translateX(0px);
-        }
-    }
-    
-    .container{
-        margin-top: 20px;
-        font-family: 'Montserrat', sans-serif;
-        justify-content: space-around;
-       
-    }
-    .container form{
-        margin-top:20px;
-        padding: 10px;
-        justify-content: space-around;
-    }
-    
-    .login-quote{
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        margin-top:20px;
-        padding: 10px;
-        font-family: 'Montserrat', sans-serif;
-        justify-content: space-around;
-        font-size: 25px;
-        text-align: center;
-        background-color:#332940;
-    }
-    
-    .message{
-        color: tomato;
-    }
-    
-    .cus-button{
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        width: 100%;
-        padding: 5px;
-        color: white;
-        background: black;
-        border-radius: 2px solid grey;
-        
-    }
-    
-    .profile_details{
-        margin-top:20px;
-        padding: 10px;
-        font-family: 'Montserrat', sans-serif;
-        justify-content: space-around;
-        text-align: left;
-        font-size: 19px;
-        
-    }
-    
-    .inputarea{
-        letter-spacing: 5px;
-        width: 100%;
-        padding: 5px;
-    }
-    
-    .cus-img-circle {
-        width: 300px;
-        border-radius: 50%;
-    }
-    
-    .hidden-stuff {
-        display: none;
-    }
-    
-    .cus-textarea{
-        min-height: 80vh;
-        margin-top:20px;
-        padding: 10px;
-        font-family: 'Montserrat', sans-serif;
-        justify-content: space-around;
-        text-align: left;
-        font-size: 19px;
-    }
-    
-    .poem-header{
-        background-color: #332940;
-        margin-top:20px;
-        padding: 10px;
-        font-family: 'Montserrat', sans-serif;
-        justify-content: space-around;
-        text-align: left;
-        font-size: 19px;
-    }
-    
-    .poem-body{
-        margin-top: 20px;
-        padding: 10px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 22px;
-    
-    }
-    
-    .tool-panel{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        min-height: 8vh;
-        font-family: 'Montserrat', sans-serif;
-        background-color: #332940;
-    }
-    .tool-items{
-        display: flex;
-        justify-content: space-around;
-        width: 80%;
-        margin-bottom: 0%;
-        
-    }
-    
-    .tool-items li{
-        list-style: None;
-        cursor:pointer;
-    
-    }
-    
-    hr{
-        color: 2px black solid;
-    }
-    
-    .comments-pannel{
-        display: none;
-        background-color: #332940;
-        margin-top: 20px;
-        padding: 10px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 16px;
-    
-    }
-    
-    .comment-div p {
-        font-size: 18px;
-    }
-    
-    .valer{
-        display: flex;
-    }
-    
-    .card{
-        margin-left: 0px;
-        margin-right: 0px;
-        padding-left: 0px;
-        padding-right: 0px;
-        background-color: #332940;
-        font-family: 'Montserrat', sans-serif;
-    
-    }
-    
-    .opening{
-        text-transform: uppercase;
-        font-family: 'Montserrat', sans-serif;
-        letter-spacing: 5px;
-    }
-    
-    .cus-button-2{
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        width: 100%;
-        padding: 5px;
-        border: gray 2px solid;
-        border-radius: 2px;
-        background-color: black;
-        width: 100%;
-        text-align: center;
-    }
-    
+.form-data {
+    font-family: 'Montserrat', sans-serif !important;
+}
+.quote-Wrapper {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1.8rem;
+}
+.h1{
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 2.5rem;
+}
+.card{
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1.5px 5px 0 rgba(0, 0, 0, 0.19);
+}
+.card-body{
+    padding: 1.5rem;
+}
+.card-img-top:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: .1s;
+}
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.image{
+    width: 100%;
+    height: auto;
+}
+
+.TitleWrapper{
+    padding: 1.5rem;
+}
+
+.tool-items {
+    display: flex;
+}
+.tool-items li {
+    list-style: none;
+    margin: 1rem;
+}
+
+.tool-items li :hover{
+    cursor: pointer;
+    font-size: large;
+}
+.text-area{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    height: 80vh;
+}
+
+.hidden-stuff{
+    display: none;
 }

@@ -2,25 +2,48 @@
 
 {% block body %}
     <div class="container">
-        <h2>Login</h2>
+        <div class="Header">
+            <h2>Login</h2>
+        </div>
 
         {% if message %}
-            <div class="message">{{ message }}</div>
+            <div class="card m-2 bg-dark text-white">
+                <div class="card-body">
+                    {{ message }}
+                </div>
+            </div>
         {% endif %}
 
         <div class="row">
-            <div class="col-lg-4 col-sm-12 login-quote">
-                “some winters
-                will never melt
+            <div class="col-md-4 col-sm-12 login-quote">
+                <div class="card m-2 form-data">
+                    <div class="card-body">
+                        <p>
+                            <i class="fas fa-quote-left"></i> 
+                        some winters
+                        will never melt
+                        </p>
 
-                some summers
-                will never freeze
-
-                and some things will only
-               live in poems.” 
+                        <p>
+                        some summers
+                        will never freeze
+                        </p>
+                        
+                        <p>
+                        and some things will only
+                       live in poems.<i class="fas fa-quote-right"></i>
+                       </p>
+                       
+                    </p>
+                    </div>
+                </div>
+                
             </div>
 
-            <form action="{% url 'login' %}" method="post" class="col-lg-8 col-sm-12">
+            <form action="{% url 'login' %}" method="post" class="col-md-8 col-sm-12">
+                <div class="m-2">
+
+                
                 {% csrf_token %}
                 <div class="form-group">
                     <input autofocus class="form-control" type="text" name="username" placeholder="Username">
@@ -28,8 +51,9 @@
                 <div class="form-group">
                     <input class="form-control" type="password" name="password" placeholder="Password">
                 </div>
-                <input class="cus-button" type="submit" value="Log-in">
-                <p style="padding: 5px;">Wanna express yourself ,But have an account?<a href="#">register here!</a></p>
+                <input class="btn btn-outline-dark" type="submit" value="Log-in">
+                <p style="padding: 5px;">Wanna express yourself ,But don't have an account? <a href="#">register here!</a></p>
+            </div>
             </form>
             
         </div>

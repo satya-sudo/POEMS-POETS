@@ -2,26 +2,46 @@
 
 {% block body %}
     <div class="container-xl container-lg container-md container-sm">
-        <h1  class='opening'style="padding: 10px;">Poems & poets</h1>
-        <div class="login-quote">
-            “Poetry is ordinary language raised to the Nth power.
-             Poetry is boned with ideas, nerved and blooded with emotions,
-              all held together by the delicate, tough skin of words.”
+        <div class="m-2">
+            <h1  class='Header'style="padding: 10px;">Poems & Poets</h1>
+        </div>
+        
+        <div class="quote-Wrapper m-2 text-center">
+           
+            <p>
+                <i class="fas fa-quote-left"></i>
+                Poetry is ordinary language raised to the Nth power.
+            </p>
+            <p>
+                Poetry is boned with ideas, nerved and blooded with emotions,
+
+            </p>
+            <p>
+                all held together by the delicate, tough skin of words.
+                <i class="fas fa-quote-right"></i>
+            </p>
+            
             
         </div>
-
-        <h1 style="padding: 10px;">Discover...</h1>
         
+        <div class="m-2 py-2">
+            <h1>Discover...</h1>
+        </div>
+      
 
-        <div class="row">
+        <!-- <div class="row"> -->
+            <div class="row row-cols-2 row-cols-md-3  row-cols-lg-4">
             {% for i in posts %}
-            <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-6">
+            <!-- <div class="col-md-4 col-sm-12"> -->
+                <div class="col mb-4">
+                <div class="card">
                 <img src="{{i.cover_image.url}}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">{{i.title}}</h5>
-                  <p class="card-text">{{i.discription}}</p>
-                  <h6 style="padding:2px;">By <a style='text-decoration: none; color: black;padding:2px;' href="{% url 'profile' i.user.pk %}">{{i.user.username}}</a</h6>
-                  <button class="cus-button-2"><a href="{% url 'poem_view' i.pk %}" >view-poem</a></button>
+                  <p class="card-text">{{i.discription|truncatechars:50 }}</p>
+                  <h6 class="m">By <a style='text-decoration: none; color: blue;padding:2px;' href="{% url 'profile' i.user.pk %}">{{i.user.username}}</a></h6>
+                  <button class="btn btn-outline-dark  btn-block"><a href="{% url 'poem_view' i.pk %}" >view-poem</a></button>
+                </div>
                 </div>
               </div>
             {% empty %}

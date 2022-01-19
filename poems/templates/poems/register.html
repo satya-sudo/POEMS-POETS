@@ -2,43 +2,67 @@
 
 {% block body %}
     <div class="container">
-        <h2>Sign-Up</h2>
+        <div class="Header">
+            <h2>Sign Up</h2>
+        </div>
 
         {% if message %}
-            <div class="message">{{ message }}</div>
+            <div class="card m-2 bg-dark text-white">
+                <div class="card-body">
+                    {{ message }}
+                </div>
+            </div>
         {% endif %}
 
         <div class="row">
-            <div class="col-lg-4 col-sm-12 login-quote">
-                “some winters
-                will never melt
+            
+            <div class="col-md-4 col-sm-12 login-quote">
+                <div class="card m-2"
+                >
+                <div class="card-body"> 
+                    <p>
+                        <i class="fas fa-quote-left"></i> 
+                        some winters
+                        will never melt
+                        </p>
 
-                some summers
-                will never freeze
+                        <p>
+                        some summers
+                        will never freeze
+                        </p>
+                        
 
-                and some things will only
-               live in poems.” 
+                        <p>
+                        and some things will only
+                        live in poems.<i class="fas fa-quote-right"></i>
+                        </p>
+                </div>
+                </div>
             </div>
 
-            <form action="{% url 'register' %}" method="post" class="col-lg-8 col-sm-12">
-                {% csrf_token %}
-                <div class="form-group">
-                    <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+            <form action="{% url 'register' %}" method="post" class="col-md-8 col-sm-12">
+                <div class="m-2 form-data">
+
+                
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="email" name="email" placeholder="Email Address">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="fullname" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+                    </div>
+                    <input class="btn btn-outline-dark" type="submit" value="Sign-Up">
+                    <p style="padding: 5px;">Already a part of our family? <a href="#">Log-in here!</a></p>
                 </div>
-                <div class="form-group">
-                    <input class="form-control" type="email" name="email" placeholder="Email Address">
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="fullname" placeholder="Name">
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="password" name="password" placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
-                </div>
-                <input class="cus-button" type="submit" value="Sign-Up">
-                <p style="padding: 5px;">Already a part of our family?<a href="#">Log-in here!</a></p>
             </form>
             
         </div>

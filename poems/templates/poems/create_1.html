@@ -2,39 +2,53 @@
 
 {% block body %}
     <div class="container">
-        <h2>Create .. </h2>
+        <div class="Header">
+            <h2>Create..</h2>
+        </div>
+
 
         {% if message %}
-            <div class="message">{{ message }}</div>
+            <div class="card m-2 bg-dark text-white">
+                <div class="card-body">
+                    {{ message }}
+                </div>
+            </div>
         {% endif %}
 
         <div class="row">
-            <div class="col-lg-12 col-sm-12 login-quote">
-                “some winters
-                will never melt
+            <div class="quote-Wrapper m-2 text-center">
+           
+                <p>
+                    <i class="fas fa-quote-left"></i>
+                    some winters will never melt
 
-                some summers
-                will never freeze
-
-                and some things will only
-               live in poems."
+                    
+                    some summers
+                    will never freeze
+    
+                    and some things will only
+                    live in poems.
+                    <i class="fas fa-quote-right"></i>
+                </p>
+                
+                
             </div>
-            <div class="col-lg-12 col-sm-12 login-quote">   
+            <!-- <div class="col-lg-12 col-sm-12 login-quote">   
                <ul>
                <li style="list-style: none;"> the fields in this step are not mandatory </li>
                
                <li  style="list-style: none;"> when uploading a cover image we recommend a 614x900 portrait</li>
               
                 </ul>
-            </div>
+            </div> -->
 
-            <form action="{% url 'create' %}" method="post" class="col-lg-12 col-sm-12" id='form-2' enctype="multipart/form-data">
+            <form action="{% url 'create' %}" method="post" class="col-lg-12 col-sm-12 m-2" id='form-2' enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group">
                     <input class="form-control" autofocus type="text" name="title" placeholder="Give a title to your poem ...">
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control cus-textarea" autofocus type="text" name="discription" placeholder="Add a discription to your poem .."></textarea>
+                    <textarea class="form-control text-area" autofocus type="text" name="discription" placeholder="Add a discription to your poem .."></textarea>
                 </div>
                 <input type="hidden" name='pk' value={{ pk }}>
                 <input type="hidden" name='part' value="part-2">
@@ -46,7 +60,7 @@
                 </select>
                 <input type="file" accept="/image*" id='xfile' name='file' class="hidden-stuff">
                 <label for="xfile"> <i class="fas fa-camera col-12" id='upload_image'> Add a cover image</i></label>
-                <input class="cus-button" type="submit" value="All Done...">
+                <input class="btn btn-block btn-outline-dark" type="submit" value="All Done...">
             </form>
             
         </div>

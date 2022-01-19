@@ -4,57 +4,72 @@
     <div class="container">
 
         {% if message %}
-            <div class="message">{{ message }}</div>
+            <div class="card m-2 bg-dark text-white">
+                <div class="card-body">
+                    {{ message }}
+                </div>
+            </div>
         {% endif %}
 
-        <div class="row" style="display: flex;" id="header">
+        <div class="row m-2" id="header">
 
             <div class="col-lg-4 col-sm-12 login-quote">
-                <img src="{{poem.cover_image.url}}" alt="">
+                <img src="{{poem.cover_image.url}}" class="image"> 
             </div>
 
-            <div class="col-lg-8 col-sm-12 poem-header">
-               <h3>{{poem.title}}</h3>
-               <div class="about">{{poem.discription |safe }}</div>
-               <div class="name">Author: {{poem.user.username}}</div>    
-               <div class='created-on'>Posted on {{ poem.created_on}}</div>        
+            <div class="col-lg-8 col-sm-12 TitleWrapper">
+               <h3 class="py-2 text-sm-center text-capitalize">{{poem.title}}</h3>
+               <div class="about py-2">{{poem.discription |safe|truncatechars:100 }}</div>
+               <div class="name py-2">Author: {{poem.user.username}}</div>    
+               <div class='created-on py-2'>Posted on {{ poem.created_on}}</div>        
             </div>
        
         </div>
 
         <div class="row poem-body" id='body'>
-            <div class='col-lg-12 tool-panel'>
-                <ul class="tool-items">
-                    {% if user_logged %}
-                        {% if library %}
-                            <li id='n_ur'><i class="fas fa-book-reader"></i></li>
+            <div class='col-lg-12'>
+                <div >
+                    <ul class="tool-items">
+                        {% if user_logged %}
+                            {% if library %}
+                                <li id='n_ur'><i class="fas fa-book-reader"></i></li>
+                            {% else %}
+                                <li id='i_ur'><i class="fas fa-book-open"></i></li>
+                            {% endif %}
                         {% else %}
-                            <li id='i_ur'><i class="fas fa-book-open"></i></li>
+                            <li id='d_ur'><i class="fas fa-sign-in-alt"></i></li>
                         {% endif %}
-                    {% else %}
-                        <li id='d_ur'><i class="fas fa-sign-in-alt"></i></li>
-                    {% endif %}
-                    <li id='comment-toggle'><i class="fas fa-comments"></i></li>
-                    <li id='full-screen'><i class="fas fa-expand"></i></li>
-                </ul>
+                        <li id='comment-toggle'><i class="fas fa-comments"></i></li>
+                        <li id='full-screen'><i class="fas fa-expand"></i></li>
+                    </ul>
+                </div>
+
             </div>
             <div id='comment-box' class='col-lg-12 comments-pannel'>
                 <h4>Comments...</h4>
                 <hr>
                 {% if user.is_authenticated %}
-                    <div>
-                        <textarea style="width: 100%;" id='comment-box-text-area'></textarea>
-                        <input type='submit' value="comment!" id='comment-box-button'>
+                    <div class="card">
+                        <div class="card-body"> 
+                            <textarea style="width: 100%;" id='comment-box-text-area'></textarea>
+                            <input type='submit' class="btn btn-outline-dark" value="comment!" id='comment-box-button'>
+                        </div>
                     </div>
                 {% else %}
                     <div>login to add a comment</div>
                 {% endif %}
 
                 <hr>
+                <div>
+
+                
                 {% for i in comments %}
-                    <div class="comment-div">
+                    <div class="card">
+                        <div class="card-body">
                         <p>{{i.content}}</p>
-                        <div>by {{i.user.username}} on {{i.commented_on}}</div>
+
+                        by {{i.user.username}} on {{i.commented_on}}
+                        </div>
                     </div>
                     <hr>
                 {% empty %}
@@ -62,6 +77,7 @@
                         No comments yet ... 
                     </div>
                 {% endfor %}
+                </div>
             </div>
             <div class="col-lg-12">
                 {{content |safe}}
